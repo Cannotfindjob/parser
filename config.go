@@ -2,7 +2,7 @@ package parser
 
 import (
 	"errors"
-	"parser/yaml"
+	"github.com/Cannotfindjob/parser/yaml"
 )
 
 type ParseType string
