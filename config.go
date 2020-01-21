@@ -57,7 +57,6 @@ func NewConfig(name ParseType, path string) *Config {
 	if name == "" || path == "" {
 		panic(ErrNameOrPath)
 	}
-
 	config.Name = name
 	config.Path = path
 	config.Loader()
