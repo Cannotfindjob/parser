@@ -7,11 +7,17 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"mant/core/base"
 	"os"
 	"strings"
 	"sync"
+	"reflect"
 )
+
+
+func ClearStruct(v interface{}) {
+	p := reflect.ValueOf(v).Elem()
+	p.Set(reflect.Zero(p.Type()))
+}
 
 var (
 	defaultSegmentLength = 1 << 6
@@ -99,7 +105,7 @@ func (y *Yaml) ParseData() error {
 					y.Match(&s, nil, nil)
 
 					// clear struct of segment
-					base.ClearStruct(&s)
+					ClearStruct(&s)
 				}
 
 				s.key = line
@@ -211,7 +217,7 @@ func (y *Yaml) KeyAnchor(s *segment) {
 					y.Match(seg, nil, y.Data)
 
 					// clear struct of seg
-					base.ClearStruct(seg)
+					ClearStruct(seg)
 				}
 
 				newLine := realKey + "." + v
